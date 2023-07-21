@@ -1,12 +1,15 @@
 import React from "react";
-import './app.css';
+import "./app.css";
 
-const App = () =>{
-    return (
-        <h1 className="text-3xl text-lime-400">
-            Hello world! I am using React
-        </h1>
-    )
-}
+import WindowBase from 'components/WindowBase';
 
-export default App
+const App = () => {
+  return (
+    <>
+      <h1 className="text-3xl text-lime-400">Hello world! I am using React</h1>
+      <WindowBase />
+    </>
+  );
+};
+
+export default App;
