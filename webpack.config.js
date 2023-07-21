@@ -17,6 +17,7 @@ module.exports = {
         exclude: /node_modules/,
         resolve: {
           extensions: ['.ts', '.tsx', '.js', '.json'],
+          preferRelative: true
         },
         use: 'ts-loader',
       },
