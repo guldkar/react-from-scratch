@@ -1,70 +1,60 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 const WindowBase = () => {
   const [position, setPosition] = useState<Position>({ x: 250, y: 250 });
   const [size, setSize] = useState<WindowSize>({ width: 400, height: 300 });
 
-
-  let initialPosition: Position = {x: 0, y: 0};
- 
-  const resizeTarget = useCallback((ev: Event) => {
+  const resizeTarget = useCallback(
+    (initPos: Position) => (ev: Event) => {
       let event = ev as MouseEvent;
-      console.log(event.clientX, event.clientY);
-    setSize({
-      height: size.height + (event.clientY - initialPosition.y),
-      width: size.width + (event.clientX - initialPosition.x),
-    });
-  }, []);
- 
-  const moveTarget = useCallback((ev: Event) => {
-    let event = ev as MouseEvent;
-    console.log(event.clientX, event.clientY, position);
-    setPosition({
-      x: position.x + (event.clientX - initialPosition.x),
-      y: position.y + (event.clientY - initialPosition.y),
-    });
-  }, []);
+      setSize({
+        height: size.height + (event.clientY - initPos.y),
+        width: size.width + (event.clientX - initPos.x),
+      });
+    },
+    []
+  );
 
-  const startMovement = (ev: React.MouseEvent): void => {
-    ev.preventDefault();
-    initialPosition = { x: ev.clientX, y: ev.clientY };
-    document.addEventListener("mousemove", moveTarget, false);
+  const moveTarget = useCallback(
+    (initPos: Position) => (ev: Event) => {
+      let event = ev as MouseEvent;
+      let { dx, dy } = getDeltaPos(event, initPos);
+      setPosition({
+        x: position.x + dx,
+        y: position.y + dy,
+      });
+    },
+    []
+  );
+
+  const getDeltaPos = (ev: MouseEvent, initPos: Position) => {
+    return {
+      dx: ev.clientX - initPos.x,
+      dy: ev.clientY - initPos.y,
+    };
   };
 
-  const stopMovement = (): void => {
-    document.removeEventListener("mousemove", moveTarget);
+  const startMovement = (ev: React.MouseEvent): void => {
+    let move = moveTarget({ x: ev.clientX, y: ev.clientY });
+
+    document.addEventListener("mousemove", move, false);
+    document.addEventListener(
+      "mouseup",
+      () => document.removeEventListener("mousemove", move),
+      { once: true }
+    );
   };
 
   const startResize = (ev: React.MouseEvent) => {
-    initialPosition = { x: ev.clientX, y: ev.clientY };
-    console.log(initialPosition)
-    document.addEventListener("mousemove", resizeTarget);
+    let resize = resizeTarget({ x: ev.clientX, y: ev.clientY });
+
+    document.addEventListener("mousemove", resize);
+    document.addEventListener(
+      "mouseup",
+      () => document.removeEventListener("mousemove", resize),
+      { once: true }
+    );
   };
-
-  const stopReszie = () => {
-    document.removeEventListener("mousemove", resizeTarget);
-  };
-
-
-    const logwindow = (ev: Event) => {
-        let event = ev as MouseEvent;
-        document.getElementById("this-dumb")!.innerHTML =`x: ${event.clientX}, y: ${event.clientY} `
-    }
-
-    const logDiv = (ev: Event) => {
-        let event = ev as MouseEvent;
-        document.getElementById("this-dumb")!.innerHTML =`x: ${event.clientX}, y: ${event.clientY} `
-    }
-
-    const onEnter = (ev: React.MouseEvent) => {
-        document.removeEventListener("mousemove",logwindow);
-        document.addEventListener("mousemove", logDiv);
-    }
-
-    const onLeave = (ev: React.MouseEvent) => {
-        document.removeEventListener("mousemove", logDiv);
-        document.addEventListener("mousemove", logwindow);
-    }
 
   return (
     <div
@@ -76,8 +66,7 @@ const WindowBase = () => {
         height: size.height,
         background: "magenta",
       }}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
+      draggable="false"
     >
       <div
         style={{
@@ -85,12 +74,11 @@ const WindowBase = () => {
           height: 25,
           background: "blue",
         }}
+        draggable="false"
         onMouseDown={startMovement}
-        onMouseUp={stopMovement}
       ></div>
 
-      <div id="this-dumb">
-      </div>
+      <div id="this-dumb"></div>
       <div
         style={{
           position: "absolute",
@@ -101,7 +89,6 @@ const WindowBase = () => {
           background: "black",
         }}
         onMouseDown={startResize}
-        onMouseUp={stopReszie}
       ></div>
     </div>
   );
