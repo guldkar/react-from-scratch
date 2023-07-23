@@ -1,57 +1,39 @@
-import React, { useState, useCallback, PropsWithChildren } from 'react';
+import React, {
+    useState,
+    useCallback,
+    PropsWithChildren,
+    useEffect,
+} from 'react';
 
 const WindowBase = (props: PropsWithChildren) => {
-    const [position, setPosition] = useState<Position>({ x: 250, y: 250 });
-    const [size, setSize] = useState<WindowSize>({ width: 400, height: 300 });
+    const resizeTarget = (ev: Event) => {
+        let event = ev as MouseEvent;
+        const target = document.getElementById('test')!;
+        target.style.width = `${target.offsetWidth + event.movementX}px`;
+        target.style.height = `${target.offsetHeight + event.movementY}px`;
+    };
 
-    const resizeTarget = useCallback(
-        (initPos: Position) => (ev: Event) => {
-            let event = ev as MouseEvent;
-            setSize({
-                height: size.height + (event.clientY - initPos.y),
-                width: size.width + (event.clientX - initPos.x),
-            });
-        },
-        []
-    );
-
-    const moveTarget = useCallback(
-        (initPos: Position) => (ev: Event) => {
-            let event = ev as MouseEvent;
-            let { dx, dy } = getDeltaPos(event, initPos);
-            setPosition({
-                x: position.x + dx,
-                y: position.y + dy,
-            });
-        },
-        []
-    );
-
-    const getDeltaPos = (ev: MouseEvent, initPos: Position) => {
-        return {
-            dx: ev.clientX - initPos.x,
-            dy: ev.clientY - initPos.y,
-        };
+    const moveTarget = (ev: Event) => {
+        let event = ev as MouseEvent;
+        const target = document.getElementById('test')!;
+        target.style.left = `${target.offsetLeft + event.movementX}px`;
+        target.style.top = `${target.offsetTop + event.movementY}px`;
     };
 
     const startMovement = (ev: React.MouseEvent): void => {
-        let move = moveTarget({ x: ev.clientX, y: ev.clientY });
-
-        document.addEventListener('mousemove', move, false);
+        document.addEventListener('mousemove', moveTarget, false);
         document.addEventListener(
             'mouseup',
-            () => document.removeEventListener('mousemove', move),
+            () => document.removeEventListener('mousemove', moveTarget),
             { once: true }
         );
     };
 
     const startResize = (ev: React.MouseEvent) => {
-        let resize = resizeTarget({ x: ev.clientX, y: ev.clientY });
-
-        document.addEventListener('mousemove', resize);
+        document.addEventListener('mousemove', resizeTarget);
         document.addEventListener(
             'mouseup',
-            () => document.removeEventListener('mousemove', resize),
+            () => document.removeEventListener('mousemove', resizeTarget),
             { once: true }
         );
     };
@@ -60,12 +42,13 @@ const WindowBase = (props: PropsWithChildren) => {
         <div
             style={{
                 position: 'absolute',
-                top: position.y,
-                left: position.x,
-                width: size.width,
-                height: size.height,
+                top: 200,
+                left: 300,
+                width: 300,
+                height: 200,
                 background: 'magenta',
             }}
+            id='test'
             draggable='false'>
             <div
                 style={{
