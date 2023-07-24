@@ -17,7 +17,7 @@ const App = () => {
             </h1>
             <button onClick={() => dispatch(open())}>open window</button>
             {windows.map((win) => (
-                <WindowBase key={win.id} />
+                <WindowBase key={win.id} id={win.id} />
             ))}
         </>
     );

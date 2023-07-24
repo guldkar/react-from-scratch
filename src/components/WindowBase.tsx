@@ -1,11 +1,10 @@
-import React, {
-    useState,
-    useCallback,
-    PropsWithChildren,
-    useEffect,
-} from 'react';
+import React, { PropsWithChildren } from 'react';
 
-const WindowBase = (props: PropsWithChildren) => {
+export interface WindowBaseProps {
+    id: string;
+}
+
+const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
     const resizeTarget = (ev: Event) => {
         let event = ev as MouseEvent;
         const target = document.getElementById('test')!;
@@ -41,47 +40,25 @@ const WindowBase = (props: PropsWithChildren) => {
     return (
         <div
             style={{
-                position: 'absolute',
                 top: 200,
                 left: 300,
                 width: 300,
                 height: 200,
-                background: 'magenta',
             }}
+            className='shadow-lg rounded border border-slate-300 absolute overflow-hidden'
             id='test'
             draggable='false'>
             <div
-                style={{
-                    width: '100%',
-                    height: 25,
-                    background: 'blue',
-                }}
+                className='box-border h-6 w-full bg-slate-300'
                 draggable='false'
                 onMouseDown={startMovement}></div>
 
             <div>{props.children}</div>
             <div
-                style={{
-                    position: 'absolute',
-                    right: 0,
-                    bottom: 0,
-                    height: 20,
-                    width: 20,
-                    background: 'black',
-                }}
+                className='absolute right-0 bottom-0 w-0 h-0 border-solid border-b-[10px] border-r-[10px] border-b-zinc-400 border-r-zinc-400 border-l-transparent border-l-[10px] border-t-[10px] border-t-transparent'
                 onMouseDown={startResize}></div>
         </div>
     );
 };
 
 export default WindowBase;
-
-export interface Position {
-    x: number;
-    y: number;
-}
-
-interface WindowSize {
-    height: number;
-    width: number;
-}
