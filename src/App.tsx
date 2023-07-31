@@ -4,6 +4,8 @@ import './app.css';
 import { useAppSelector, useAppDispatch } from 'hooks/State';
 import { open } from 'state/WindowSlice';
 
+import Info from 'components/Info';
+
 import WindowBase from 'components/WindowBase';
 
 const App = () => {
@@ -11,15 +13,15 @@ const App = () => {
     const dispatch = useAppDispatch();
     console.log('rerender', windows);
     return (
-        <>
-            <h1 className='text-3xl text-lime-400'>
-                Hello world! I am using React
-            </h1>
+        <div className='bg-gradient-to-br fromsky-500 to-fuchsia-400 w-screen h-full h-screen'>
             <button onClick={() => dispatch(open())}>open window</button>
             {windows.map((win) => (
-                <WindowBase key={win.id} id={win.id} />
+                <WindowBase key={win.id} id={win.id}>
+                    {' '}
+                    <Info />{' '}
+                </WindowBase>
             ))}
-        </>
+        </div>
     );
 };
 
