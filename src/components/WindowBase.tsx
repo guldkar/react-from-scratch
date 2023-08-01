@@ -45,7 +45,7 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 width: 300,
                 height: 200,
             }}
-            className='shadow-lg rounded border border-slate-300 absolute overflow-hidden'
+            className='shadow-lg rounded border bg-orange-50 border-slate-300 absolute overflow-hidden'
             id='test'
             draggable='false'>
             <div

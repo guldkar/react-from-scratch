@@ -5,22 +5,28 @@ import { useAppSelector, useAppDispatch } from 'hooks/State';
 import { open } from 'state/WindowSlice';
 
 import Info from 'components/Info';
-
 import WindowBase from 'components/WindowBase';
+
+import Wallpaper from './assets/wallpapaper.png';
 
 const App = () => {
     const windows = useAppSelector((state) => state.window.windows);
     const dispatch = useAppDispatch();
-    console.log('rerender', windows);
     return (
-        <div className='bg-gradient-to-br fromsky-500 to-fuchsia-400 w-screen h-full h-screen'>
-            <button onClick={() => dispatch(open())}>open window</button>
-            {windows.map((win) => (
-                <WindowBase key={win.id} id={win.id}>
-                    {' '}
-                    <Info />{' '}
-                </WindowBase>
-            ))}
+        <div className='bg-cover w-screen h-screen' style={{background:  `url(${Wallpaper})`}}>
+            <div className='p-2'>
+                <button
+                    onClick={() => dispatch(open())}
+                    className='rounded bg-teal-500 text-white px-4 py-2 text-sm font-semibold shadow-sm'>
+                    open window
+                </button>
+                {windows.map((win) => (
+                    <WindowBase key={win.id} id={win.id}>
+                        {' '}
+                        <Info />{' '}
+                    </WindowBase>
+                ))}
+            </div>
         </div>
     );
 };

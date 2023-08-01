@@ -7,7 +7,7 @@ module.exports = {
   mode: prod ? 'production' : 'development',
   entry: './index.tsx',
   output: {
-    path: __dirname + '/dist/',
+    path: __dirname + '/dist/'
   },
   target: 'web',
   module: {
@@ -25,6 +25,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test:  /\.png$/i,
+        type: 'asset/resource'
+      }
     ]
   },
   devtool: prod ? undefined : 'source-map',
