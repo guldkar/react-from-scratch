@@ -11,6 +11,7 @@ import IconButton from 'components/styled/IconButton';
 import { WindowTypesEnum } from 'types/Enums';
 
 import Wallpaper from './assets/wallpapaper.png';
+import WindowMap from 'Utils/WindowMap';
 
 const App = () => {
     const windows = useAppSelector((state) => state.window.windows);
@@ -36,7 +37,7 @@ const App = () => {
                 </div>
                 {windows.map((win) => (
                     <WindowBase key={win.id} id={win.id}>
-                        <Info />
+                        {WindowMap.get(win.type)}
                     </WindowBase>
                 ))}
             </div>

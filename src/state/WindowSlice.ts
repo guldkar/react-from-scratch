@@ -26,7 +26,6 @@ export const windowSlice = createSlice({
                 type: action.payload
             };
             state.windows = state.windows.concat(newWindow);
-            console.log(state.windows);
         },
         close: (state, action: PayloadAction<string>) => {
             let index: number = state.windows.findIndex(x => x.id === action.payload);
