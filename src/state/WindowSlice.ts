@@ -3,9 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import uuid from 'react-uuid';
 
 import type { RootState } from "store";
+import { WindowTypesEnum } from "types/Enums";
 
 interface OpenWindow {
     id: string;
+    type: WindowTypesEnum
 }
 
 interface WindowState {
@@ -18,9 +20,10 @@ export const windowSlice = createSlice({
     name: 'window',
     initialState,
     reducers: {
-        open: (state) => {
+        open: (state, action: PayloadAction<WindowTypesEnum>) => {
             let newWindow: OpenWindow = {
-                id: uuid()
+                id: uuid(),
+                type: action.payload
             };
             state.windows = state.windows.concat(newWindow);
             console.log(state.windows);
