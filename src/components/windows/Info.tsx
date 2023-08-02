@@ -1,9 +1,7 @@
 import React from 'react';
-import Profile from '../assets/profile.png'
+import Profile from '../../assets/profile.png';
 
 const Info = () => {
-
-
     return (
         <div className='my-3 mx-5 w-[700px] p-3 border-b-2 border-slate-300'>
             <div className=' overflow-hidden flex border-b-2 border-slate-300 pb-3 mb-2'>
@@ -14,8 +12,10 @@ const Info = () => {
                     />
                 </div>
                 <div className='grid grid-cols-4 ml-3  w-full'>
-                    <div className='col-span-1'>Navn</div> <div className='col-span-3 w-full'>Johan</div>
-                    <div className='col-span-1'>Alder</div> <div className='col-span-3 w-full'>32</div>
+                    <div className='col-span-1'>Navn</div>{' '}
+                    <div className='col-span-3 w-full'>Johan</div>
+                    <div className='col-span-1'>Alder</div>{' '}
+                    <div className='col-span-3 w-full'>32</div>
                     <div className='col-span-1'>Hobbyer</div>
                     <div className='col-span-3 w-full'>
                         Gaming, Fantasy, Høns, Historie
