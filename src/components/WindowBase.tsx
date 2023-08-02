@@ -53,7 +53,7 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 draggable='false'
                 onMouseDown={startMovement}></div>
 
-            <div className='container'>{props.children}</div>
+            <div className='container p-6'>{props.children}</div>
             <div
                 className='absolute right-0 bottom-0 w-0 h-0 border-solid border-b-[10px] border-r-[10px] border-b-zinc-400 border-r-zinc-400 border-l-transparent border-l-[10px] border-t-[10px] border-t-transparent'
                 onMouseDown={startResize}></div>

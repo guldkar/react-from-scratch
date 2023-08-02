@@ -5,7 +5,6 @@ import { FaUser, FaGavel } from 'react-icons/fa';
 import { useAppSelector, useAppDispatch } from 'hooks/State';
 import { open } from 'state/WindowSlice';
 
-import Info from 'components/Info';
 import WindowBase from 'components/WindowBase';
 import IconButton from 'components/styled/IconButton';
 import { WindowTypesEnum } from 'types/Enums';
