@@ -7,14 +7,14 @@ export interface WindowBaseProps {
 const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
     const resizeTarget = (ev: Event) => {
         let event = ev as MouseEvent;
-        const target = document.getElementById('test')!;
+        const target = document.getElementById(props.id)!;
         target.style.width = `${target.offsetWidth + event.movementX}px`;
         target.style.height = `${target.offsetHeight + event.movementY}px`;
     };
 
     const moveTarget = (ev: Event) => {
         let event = ev as MouseEvent;
-        const target = document.getElementById('test')!;
+        const target = document.getElementById(props.id)!;
         target.style.left = `${target.offsetLeft + event.movementX}px`;
         target.style.top = `${target.offsetTop + event.movementY}px`;
     };
@@ -46,7 +46,7 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 height: 200,
             }}
             className='shadow-lg rounded border bg-orange-50 border-slate-300 absolute overflow-hidden'
-            id='test'
+            id={props.id}
             draggable='false'>
             <div
                 className='box-border h-6 w-full bg-slate-300'
