@@ -1,10 +1,12 @@
 import React from 'react';
 import Profile from '../../assets/profile.png';
+import WindowHeader from '../styled/WindowHeader';
 
 const Info = () => {
     return (
         <div className='w-[700px] pb-3 border-b-2 border-slate-300'>
-            <div className=' overflow-hidden flex border-b-2 border-slate-300 pb-3 mb-2'>
+            <WindowHeader>Profil</WindowHeader>
+            <div className=' overflow-hidden flex border-b-2 pt-2 border-slate-300 pb-3 mb-2'>
                 <div className='w-1/3 inline-block relative'>
                     <img
                         src={Profile}
