@@ -1,5 +1,6 @@
 export enum WindowTypesEnum {
   Profile,
   MjolnerExperience,
-  FormerExperience
+  FormerExperience,
+  TechnicalCompetencies
 }
