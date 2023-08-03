@@ -13,13 +13,13 @@ const Info = () => {
                         className='overflow-hidden rounded-full'
                     />
                 </div>
-                <div className='grid grid-cols-4 ml-3  w-full'>
-                    <div className='col-span-1'>Navn</div>{' '}
-                    <div className='col-span-3 w-full'>Johan</div>
-                    <div className='col-span-1'>Alder</div>{' '}
-                    <div className='col-span-3 w-full'>32</div>
-                    <div className='col-span-1'>Hobbyer</div>
-                    <div className='col-span-3 w-full'>
+                <div className='flex flex-wrap items-center ml-3 w-full flex-row relative'>
+                    <div className='basis-1/4 grow-1'>Navn</div>{' '}
+                    <div className='basis-3/4 grow-[3]'>Johan</div>
+                    <div className='basis-1/4'>Alder</div>{' '}
+                    <div className='basis-3/4'>32</div>
+                    <div className='basis-1/4'>Hobbyer</div>
+                    <div className='basis-3/4'>
                         Gaming, Fantasy, Høns, Historie
                     </div>
                 </div>
