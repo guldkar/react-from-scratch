@@ -45,7 +45,7 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 width: 300,
                 height: 200,
             }}
-            className='shadow-lg rounded border bg-orange-50 border-slate-300 absolute overflow-hidden'
+            className='shadow-lg rounded border bg-orange-50 border-slate-300 absolute overflow-clip'
             id={props.id}
             draggable='false'>
             <div
@@ -53,7 +53,9 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 draggable='false'
                 onMouseDown={startMovement}></div>
 
-            <div className='container p-6'>{props.children}</div>
+            <div className='container box-border p-6 w-full h-full overflow-auto'>
+                {props.children}
+            </div>
             <div
                 className='absolute right-0 bottom-0 w-0 h-0 border-solid border-b-[10px] border-r-[10px] border-b-zinc-400 border-r-zinc-400 border-l-transparent border-l-[10px] border-t-[10px] border-t-transparent'
                 onMouseDown={startResize}></div>
