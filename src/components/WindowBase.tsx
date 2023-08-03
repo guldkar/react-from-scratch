@@ -47,11 +47,11 @@ const WindowBase = (props: PropsWithChildren<WindowBaseProps>) => {
                 width: 300,
                 height: 200,
             }}
-            className='shadow-lg rounded border bg-orange-50 border-slate-300 absolute overflow-clip'
+            className='shadow-lg rounded border bg-slate-100 border-slate-300 absolute overflow-clip'
             id={props.id}
             draggable='false'>
             <div
-                className='box-border h-6 w-full bg-slate-300'
+                className='box-border h-6 w-full bg-sky-900'
                 draggable='false'
                 onMouseDown={startMovement}></div>
 

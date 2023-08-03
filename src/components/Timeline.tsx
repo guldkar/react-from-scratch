@@ -45,7 +45,7 @@ const TimeLine = (props: TimeLineProps) => {
                                                     item.id
                                                 )
                                             }>
-                                            Read less
+                                            se mindre
                                         </a>
                                     </>
                                 ) : (
@@ -61,7 +61,7 @@ const TimeLine = (props: TimeLineProps) => {
                                                     item.id
                                                 )
                                             }>
-                                            Read more
+                                            Se mere
                                         </a>
                                     </>
                                 )}
